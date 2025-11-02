@@ -2366,7 +2366,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Village Props - Heavy Sword
+      name: STRENGTH
       rect:
         serializedVersion: 2
         x: 352
@@ -4625,6 +4625,7 @@ TextureImporter:
     nameFileIdTable:
       ORB: -1796461765
       ORB_ROCK: -1758970209
+      STRENGTH: 21300168
       TX Village Props - Anvil: 21300084
       TX Village Props - Apple: 21300178
       TX Village Props - Archert Target: 21300154
@@ -4709,7 +4710,6 @@ TextureImporter:
       TX Village Props - Hay Bale: 21300076
       TX Village Props - Hay Fork: 21300080
       TX Village Props - Hay Pile: 21300078
-      TX Village Props - Heavy Sword: 21300168
       TX Village Props - Jump Platform 01: -2001510239
       TX Village Props - Kettle: 21300202
       TX Village Props - Ladder 01 B: 21300074

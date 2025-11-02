@@ -14,6 +14,7 @@ public class MiniMap : MonoBehaviour
     private void Update()
     {
         cameraPosition.x = target.position.x;
+        cameraPosition.y = target.position.y;
         transform.position = cameraPosition;
     }
 }

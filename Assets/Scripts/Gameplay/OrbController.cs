@@ -7,7 +7,7 @@ public class OrbController : MonoBehaviour
     [SerializeField] private GameObject winCollider;
     [SerializeField] private TextMeshProUGUI orbCounter;
     [SerializeField] private TextMeshProUGUI necessaryOrbsText;
-    [SerializeField] private int necessaryOrbs;
+    public int necessaryOrbs;
 
     [NonSerialized] public int numOfOrbs = 0;
 

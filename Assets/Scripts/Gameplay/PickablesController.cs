@@ -3,16 +3,26 @@ using UnityEngine;
 public class PickablesController : MonoBehaviour
 {
     public static event Action<PickablesController> onCoinsPicked;
-    public static event Action<PickablesController, bool, bool, bool> onPickablesMakeSound;
+    public static event Action<PickablesController, int> onPlayerAddDamage;
+    public static event Action<PickablesController, bool, bool, bool, bool> onPickablesMakeSound;
+
+    [SerializeField] private PlayerDataSo data;
 
     [Header("Type of pickable")]
     [SerializeField] private bool isLife = false;
     [SerializeField] private bool isExtraLife = false;
     [SerializeField] private bool isCoin = false;
+    [SerializeField] private bool isStrength = false;
 
     [Header("Stats")]
     [SerializeField] private int lifeHeal;
     [SerializeField] private int lifeAdd;
+    [SerializeField] private int strengthAdd;
+
+    private void Start()
+    {
+        data.currentDamage = data.damage;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,6 +49,16 @@ public class PickablesController : MonoBehaviour
                 healthSystem.AddLife(lifeAdd);
             }
         }
+
+        if (isStrength)
+        {
+            data.currentDamage += strengthAdd;
+
+            if (data.currentDamage >= data.maxDamage)
+                data.currentDamage = data.maxDamage;
+
+            onPlayerAddDamage?.Invoke(this, data.currentDamage);
+        }
     }
 
     public void CoinPicked()
@@ -51,6 +71,6 @@ public class PickablesController : MonoBehaviour
 
     public void PickablesSound()
     {
-        onPickablesMakeSound?.Invoke(this, isLife, isExtraLife, isCoin);
+        onPickablesMakeSound?.Invoke(this, isLife, isExtraLife, isCoin, isStrength);
     }
 }

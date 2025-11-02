@@ -12,7 +12,9 @@ public class PlayerDataSo : ScriptableObject
     public float dashDuration;
     public float dashCooldown;
     public float onHurtForce;
-    public int posibleJumps;
+    public int damage;
+    public int currentDamage;
+    public int maxDamage;
 
     [Header("Key Bindings")]
     public KeyCode goLeft;

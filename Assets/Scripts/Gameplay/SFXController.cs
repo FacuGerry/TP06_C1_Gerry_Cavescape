@@ -34,6 +34,8 @@ public class SFXController : MonoBehaviour
         PlayerController.onPlayerDie += OnPlayerDie_GameOverSound;
 
         PlayerDoDamage.onPlayerDoDamage += OnPlayerDoDamage_EnemyHurtSound;
+
+        OrbCounter.onOrbPicked += OnOrbPicked_EmmitSound;
     }
 
     private void OnDisable()
@@ -47,9 +49,11 @@ public class SFXController : MonoBehaviour
         PlayerController.onPlayerDie -= OnPlayerDie_GameOverSound;
 
         PlayerDoDamage.onPlayerDoDamage -= OnPlayerDoDamage_EnemyHurtSound;
+
+        OrbCounter.onOrbPicked -= OnOrbPicked_EmmitSound;
     }
 
-    public void OnCoinsPicked_EmmitSound(PickablesController pickablesController, bool isLife, bool isExtraLife, bool isCoin)
+    public void OnCoinsPicked_EmmitSound(PickablesController pickablesController, bool isLife, bool isExtraLife, bool isCoin, bool isStrength)
     { 
         if (isLife)
         {
@@ -62,6 +66,10 @@ public class SFXController : MonoBehaviour
         if (isCoin)
         {
             sfx.PlayOneShot(coinClip);
+        }
+        if (isStrength)
+        {
+            sfx.PlayOneShot(extraDamageClip);
         }
     }
 
@@ -99,5 +107,10 @@ public class SFXController : MonoBehaviour
     {
         sfx.PlayOneShot(enemyHurtSound);
         Debug.Log("OnPlayerDoDamage_EnemyHurtSound");
+    }
+
+    public void OnOrbPicked_EmmitSound(OrbCounter orbCounter)
+    {
+        sfx.PlayOneShot(orbClip);
     }
 }

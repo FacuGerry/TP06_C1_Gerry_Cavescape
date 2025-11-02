@@ -160,8 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a10ee147b746094eb822488486edfb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 7c2360be748542a479ca75dc4e8d5d7c, type: 2}
   isLife: 1
   isExtraLife: 0
   isCoin: 0
+  isStrength: 0
   lifeHeal: 15
   lifeAdd: 0
+  strengthAdd: 0
