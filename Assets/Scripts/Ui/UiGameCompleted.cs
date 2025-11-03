@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,11 +8,23 @@ public class UiGameCompleted : MonoBehaviour
     [SerializeField] private GameObject levelCompleted;
     [SerializeField] private Button btnReplay;
     [SerializeField] private Button btnMainMenu;
+    [SerializeField] private CoinsDataSo coinsData;
+    [SerializeField] private PlayerPrefsSo playerPrefs;
+    [SerializeField] private TextMeshProUGUI maxCoinsText;
+    [SerializeField] private TextMeshProUGUI gamesPlayedText;
+    [SerializeField] private TextMeshProUGUI gamesWonText;
 
     private void Start()
     {
         btnReplay.onClick.AddListener(ReplayClicked);
         btnMainMenu.onClick.AddListener(MainMenuClicked);
+
+        if (coinsData.coins >= playerPrefs.maxCoinsCollected)
+            playerPrefs.maxCoinsCollected = coinsData.coins;
+
+        maxCoinsText.text = playerPrefs.maxCoinsCollected.ToString("0");
+        gamesPlayedText.text = playerPrefs.gamesPlayed.ToString("0");
+        gamesWonText.text = playerPrefs.gamesWon.ToString("0");
     }
 
     private void OnEnable()
@@ -33,6 +46,8 @@ public class UiGameCompleted : MonoBehaviour
     public void OnDoorCollisioned_LevelCompleteUiAppear(DoorController doorController)
     {
         Time.timeScale = 0f;
+        playerPrefs.gamesWon++;
+        gamesWonText.text = playerPrefs.gamesWon.ToString("0");
         levelCompleted.SetActive(true);
     }
 

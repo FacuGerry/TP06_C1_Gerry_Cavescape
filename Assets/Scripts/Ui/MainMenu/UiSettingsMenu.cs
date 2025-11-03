@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class UiSettingsMenu : MonoBehaviour
 {
+    public static event Action<UiSettingsMenu, bool> onSettingsOpen;
     [SerializeField] private CanvasGroup canvasToToggle;
     private CanvasGroup canvas;
 
@@ -39,6 +41,7 @@ public class UiSettingsMenu : MonoBehaviour
         canvasToToggle.alpha = 1f;
         canvasToToggle.interactable = true;
         canvasToToggle.blocksRaycasts = true;
+        onSettingsOpen?.Invoke(this, false);
     }
 
     public void OnSettingsClickedInGame_CanvasAppear(UiPauseMenu uiPauseMenu)
@@ -46,5 +49,6 @@ public class UiSettingsMenu : MonoBehaviour
         canvas.alpha = 1f;
         canvas.interactable = true;
         canvas.blocksRaycasts = true;
+        onSettingsOpen?.Invoke(this, true);
     }
 }

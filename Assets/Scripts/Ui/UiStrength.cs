@@ -16,6 +16,8 @@ public class UiStrength : MonoBehaviour
     private void Start()
     {
         strengthText.text = data.damage.ToString("0");
+        float lerp = data.damage / (float)data.maxDamage;
+        strengthBar.fillAmount = lerp;
     }
 
     private void OnDisable()
@@ -25,6 +27,8 @@ public class UiStrength : MonoBehaviour
 
     public void OnPlayerAddDamage_AddDamage(PickablesController pickablesController, int damage)
     {
+        float lerp = damage / (float)data.maxDamage;
+        strengthBar.fillAmount = lerp;
         strengthText.text = damage.ToString("0");
     }
 }

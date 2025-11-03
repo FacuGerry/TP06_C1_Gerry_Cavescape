@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public static event Action<PlayerController, int> onAnimating;
 
     [SerializeField] private PlayerDataSo data;
+    [SerializeField] private PlayerPrefsSo playerPrefs;
 
     [SerializeField] private HealthSystem healthSystem;
 
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
     private bool isAlive = true;
     private bool enableLogs = true;
+    private bool isOnSettings = false;
 
     private IEnumerator CoroutineAttack;
     private IEnumerator CoroutineDash;
@@ -59,12 +61,15 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1.0f;
         isPause = false;
         isAlive = true;
+
+        playerPrefs.gamesPlayed++;
     }
 
     private void OnEnable()
     {
         healthSystem.onDie += HealthSystem_onDie;
         SlimeController.onPlayerRecieveDamage += OnPlayerRecieveDamage_AnimateDamage;
+        UiSettingsMenu.onSettingsOpen += OnSettingsOpen_IsOnSettings;
     }
 
     private void Update()
@@ -249,9 +254,13 @@ public class PlayerController : MonoBehaviour
             switch (isPause)
             {
                 case true:
-                    Time.timeScale = 1f;
-                    isPause = false;
-                    onResume?.Invoke(this);
+                    if (isOnSettings) { }
+                    else
+                    {
+                        Time.timeScale = 1f;
+                        isPause = false;
+                        onResume?.Invoke(this);
+                    }
                     break;
                 case false:
                     Time.timeScale = 0f;
@@ -266,6 +275,7 @@ public class PlayerController : MonoBehaviour
     {
         healthSystem.onDie -= HealthSystem_onDie;
         SlimeController.onPlayerRecieveDamage -= OnPlayerRecieveDamage_AnimateDamage;
+        UiSettingsMenu.onSettingsOpen -= OnSettingsOpen_IsOnSettings;
 
         StopAllCoroutines();
         CoroutineAttack = null;
@@ -351,6 +361,11 @@ public class PlayerController : MonoBehaviour
         onPlayerDie?.Invoke(this);
         isAlive = false;
         currentState = AnimationStates.Death;
+    }
+
+    public void OnSettingsOpen_IsOnSettings(UiSettingsMenu uiSettingsMenu, bool isSetting)
+    {
+        isOnSettings = isSetting;
     }
 
     public IEnumerator WaitingForNewAttack()

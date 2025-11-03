@@ -5,7 +5,6 @@ public class UiCoinCounter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI coinsText;
     [SerializeField] private CoinsDataSo coinsData;
-    private int coinsInGame;
 
     private void OnEnable()
     {
@@ -18,7 +17,6 @@ public class UiCoinCounter : MonoBehaviour
         coinsData.totalCoins = 0;
         coinsData.coins = 0;
 
-        coinsInGame = coinsData.coins;
         coinsText.text = coinsData.coins.ToString("0");
     }
 
@@ -32,7 +30,6 @@ public class UiCoinCounter : MonoBehaviour
     {
         int coinPickedValue = coinsData.coinsValue;
         coinsData.coins += coinPickedValue;
-        coinsData.totalCoins += coinPickedValue;
         coinsText.text = coinsData.coins.ToString("0");
     }
 
