@@ -14,9 +14,7 @@ public class UiCoinCounter : MonoBehaviour
 
     private void Start()
     {
-        coinsData.totalCoins = 0;
         coinsData.coins = 0;
-
         coinsText.text = coinsData.coins.ToString("0");
     }
 
@@ -28,14 +26,12 @@ public class UiCoinCounter : MonoBehaviour
 
     public void OnCoinsChanged_WriteCoins(PickablesController pickablesController)
     {
-        int coinPickedValue = coinsData.coinsValue;
-        coinsData.coins += coinPickedValue;
+        coinsData.coins++;
         coinsText.text = coinsData.coins.ToString("0");
     }
 
     public void OnPlayerDie_RestartCoins(PlayerController playerController)
     {
-        coinsData.totalCoins = 0;
         coinsData.coins = 0;
     }
 }

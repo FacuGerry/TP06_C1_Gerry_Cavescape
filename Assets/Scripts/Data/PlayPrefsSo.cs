@@ -10,7 +10,10 @@ public class PlayerPrefsSo : ScriptableObject
     public int gamesWon;
 
     [Header("Mini Map")]
-    public int miniMapColorR;
-    public int miniMapColorG;
-    public int miniMapColorB;
+    public float miniMapColorR;
+    public float miniMapColorG;
+    public float miniMapColorB;
+
+    [Header("HUD")]
+    public bool isHudOn = true;
 }

@@ -5,6 +5,7 @@ public class SFXController : MonoBehaviour
     [Header("Sources")]
     [SerializeField] private AudioSource master;
     [SerializeField] private AudioSource sfx;
+    [SerializeField] private AudioSource ui;
 
     [Header("Pickables")]
     [SerializeField] private AudioClip healClip;
@@ -23,6 +24,10 @@ public class SFXController : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private AudioClip enemyHurtSound;
 
+    [Header("Ui Sounds")]
+    [SerializeField] private AudioClip buttonClickedHard;
+    [SerializeField] private AudioClip buttonClickedSoft;
+
     private void OnEnable()
     {
         PickablesController.onPickablesMakeSound += OnCoinsPicked_EmmitSound;
@@ -36,6 +41,11 @@ public class SFXController : MonoBehaviour
         PlayerDoDamage.onPlayerDoDamage += OnPlayerDoDamage_EnemyHurtSound;
 
         OrbCounter.onOrbPicked += OnOrbPicked_EmmitSound;
+
+        UiToggleHUD.onToggleClicked += OnToggleClicked_ButtonSoftSound;
+        UiButtonsGoBack.onBack += OnBack_ButtonHardSound;
+        UiPauseMenu.onButtonClicked += OnButtonClicked_ButtonHardSound;
+        UiMainMenu.onButtonClicked += OnMainMenuButtonClicked_ButtonHardSound;
     }
 
     private void OnDisable()
@@ -51,6 +61,11 @@ public class SFXController : MonoBehaviour
         PlayerDoDamage.onPlayerDoDamage -= OnPlayerDoDamage_EnemyHurtSound;
 
         OrbCounter.onOrbPicked -= OnOrbPicked_EmmitSound;
+
+        UiToggleHUD.onToggleClicked -= OnToggleClicked_ButtonSoftSound;
+        UiButtonsGoBack.onBack -= OnBack_ButtonHardSound;
+        UiPauseMenu.onButtonClicked -= OnButtonClicked_ButtonHardSound;
+        UiMainMenu.onButtonClicked -= OnMainMenuButtonClicked_ButtonHardSound;
     }
 
     public void OnCoinsPicked_EmmitSound(PickablesController pickablesController, bool isLife, bool isExtraLife, bool isCoin, bool isStrength)
@@ -112,5 +127,25 @@ public class SFXController : MonoBehaviour
     public void OnOrbPicked_EmmitSound(OrbCounter orbCounter)
     {
         sfx.PlayOneShot(orbClip);
+    }
+
+    public void OnToggleClicked_ButtonSoftSound(UiToggleHUD uiToggleHUD)
+    {
+        ui.PlayOneShot(buttonClickedSoft);
+    }
+
+    public void OnBack_ButtonHardSound(UiButtonsGoBack uiButtonsGoBack)
+    {
+        ui.PlayOneShot(buttonClickedHard);
+    }
+
+    public void OnButtonClicked_ButtonHardSound(UiPauseMenu uiPauseMenu)
+    {
+        ui.PlayOneShot(buttonClickedHard);
+    }
+
+    public void OnMainMenuButtonClicked_ButtonHardSound(UiMainMenu uiMainMenu)
+    {
+        ui.PlayOneShot(buttonClickedHard);
     }
 }

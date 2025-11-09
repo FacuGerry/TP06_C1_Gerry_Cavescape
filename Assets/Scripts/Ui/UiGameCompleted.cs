@@ -6,10 +6,16 @@ using UnityEngine.UI;
 public class UiGameCompleted : MonoBehaviour
 {
     [SerializeField] private GameObject levelCompleted;
+
+    [Header("Buttons")]
     [SerializeField] private Button btnReplay;
     [SerializeField] private Button btnMainMenu;
+
+    [Header("Data")]
     [SerializeField] private CoinsDataSo coinsData;
     [SerializeField] private PlayerPrefsSo playerPrefs;
+
+    [Header("Text")]
     [SerializeField] private TextMeshProUGUI maxCoinsText;
     [SerializeField] private TextMeshProUGUI gamesPlayedText;
     [SerializeField] private TextMeshProUGUI gamesWonText;
@@ -18,13 +24,6 @@ public class UiGameCompleted : MonoBehaviour
     {
         btnReplay.onClick.AddListener(ReplayClicked);
         btnMainMenu.onClick.AddListener(MainMenuClicked);
-
-        if (coinsData.coins >= playerPrefs.maxCoinsCollected)
-            playerPrefs.maxCoinsCollected = coinsData.coins;
-
-        maxCoinsText.text = playerPrefs.maxCoinsCollected.ToString("0");
-        gamesPlayedText.text = playerPrefs.gamesPlayed.ToString("0");
-        gamesWonText.text = playerPrefs.gamesWon.ToString("0");
     }
 
     private void OnEnable()
@@ -46,6 +45,10 @@ public class UiGameCompleted : MonoBehaviour
     public void OnDoorCollisioned_LevelCompleteUiAppear(DoorController doorController)
     {
         Time.timeScale = 0f;
+        if (coinsData.coins > playerPrefs.maxCoinsCollected)
+            playerPrefs.maxCoinsCollected = coinsData.coins;
+        maxCoinsText.text = playerPrefs.maxCoinsCollected.ToString("0");
+        gamesPlayedText.text = playerPrefs.gamesPlayed.ToString("0");
         playerPrefs.gamesWon++;
         gamesWonText.text = playerPrefs.gamesWon.ToString("0");
         levelCompleted.SetActive(true);

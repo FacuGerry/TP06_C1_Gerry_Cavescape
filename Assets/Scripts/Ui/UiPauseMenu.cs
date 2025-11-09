@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UiPauseMenu : MonoBehaviour
 {
-
     public static event Action<UiPauseMenu> onSettingsOpen;
+    public static event Action<UiPauseMenu> onButtonClicked;
 
     private CanvasGroup canvas;
     [SerializeField] private PlayerController player;
@@ -66,16 +66,19 @@ public class UiPauseMenu : MonoBehaviour
         CanvasToggle(0, false);
         Time.timeScale = 1.0f;
         player.isPause = false;
+        onButtonClicked?.Invoke(this);
     }
 
     public void OnBtnSettingsClicked()
     {
         CanvasToggle(0, false);
         onSettingsOpen?.Invoke(this);
+        onButtonClicked?.Invoke(this);
     }
 
     public void OnBtnMainMenuClicked()
     {
+        onButtonClicked?.Invoke(this);
         SceneManager.LoadScene("MainMenu");
     }
 

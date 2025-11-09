@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlayerPrefs
   m_EditorClassIdentifier: 
   maxCoinsCollected: 0
-  gamesPlayed: 4
+  gamesPlayed: 8
   gamesWon: 0
-  miniMapColorR: 0
-  miniMapColorG: 0
-  miniMapColorB: 0
+  miniMapColorR: 255
+  miniMapColorG: 255
+  miniMapColorB: 255
+  isHudOn: 1

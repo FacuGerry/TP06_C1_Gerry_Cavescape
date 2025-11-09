@@ -7,14 +7,6 @@ public class UiButtonsGoBack : MonoBehaviour
     public static event Action<UiButtonsGoBack> onBack;
 
     [SerializeField] private Button goBack;
-
-    private CanvasGroup canvas;
-
-    private void Awake()
-    {
-        canvas = GetComponent<CanvasGroup>();
-    }
-
     private void Start()
     {
         goBack.onClick.AddListener(GoBack);

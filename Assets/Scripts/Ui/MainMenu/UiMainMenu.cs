@@ -8,6 +8,7 @@ public class UiMainMenu : MonoBehaviour
     public static event Action<UiMainMenu> onSettingsClicked;
     public static event Action<UiMainMenu> onCreditsClicked;
     public static event Action<UiMainMenu> onTutorialClicked;
+    public static event Action<UiMainMenu> onButtonClicked;
 
     private CanvasGroup canvas;
 
@@ -56,23 +57,27 @@ public class UiMainMenu : MonoBehaviour
     private void SettingsClicked()
     {
         onSettingsClicked?.Invoke(this);
+        onButtonClicked?.Invoke(this);
         CanvasManageDisappear();
     }
 
     private void CreditsClicked()
     {
         onCreditsClicked?.Invoke(this);
+        onButtonClicked?.Invoke(this);
         CanvasManageDisappear();
     }
 
     private void TutorialClicked()
     {
         onTutorialClicked?.Invoke(this);
+        onButtonClicked?.Invoke(this);
         CanvasManageDisappear();
     }
 
     private void ExitClicked()
     {
+        onButtonClicked?.Invoke(this);
         Application.Quit();
     }
 
